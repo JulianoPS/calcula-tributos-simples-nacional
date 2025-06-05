@@ -62,7 +62,7 @@ git clone https://github.com/JulianoPS/calcula-tributos-simples-nacional.git
 
 # Acesse a pasta do projeto
 cd calcula-tributos-simples-n
-
+```
 
 ## 📬 Contato
 - 🔗 **LinkedIn:** [linkedin.com/in/julianopereiradossantos]( https://www.linkedin.com/in/julianopereiradossantos )  
