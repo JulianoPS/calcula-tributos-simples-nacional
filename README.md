@@ -52,7 +52,7 @@ Aplicação desenvolvida em **Angular 19** que realiza o cálculo de tributos no
 
 ### 🔧 **Pré-requisitos**
 - Node.js >= 18
-- Angular CLI >= 17
+- Angular CLI >= 19
 
 ### ▶️ **Passos para rodar local**
 
