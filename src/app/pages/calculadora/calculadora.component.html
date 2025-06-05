@@ -1,0 +1,135 @@
+<mat-card class="calculadora-card">
+  <mat-card class="painel-principal">
+    <mat-card-header>
+      <mat-card-title>Calculadora Simples Nacional</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="input-botoes">
+        <mat-form-field appearance="outline" class="input-faturamento">
+          <mat-label>Atividade</mat-label>
+          <mat-select [(ngModel)]="atividadeSelecionada">
+            <mat-option *ngFor="let a of listaAtividades" [value]="a">
+              {{ a }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="input-faturamento">
+          <mat-label>Faturamento Mensal (R$)</mat-label>
+          <input
+            matInput
+            type="text"
+            currencyMask
+            [(ngModel)]="faturamentoMensal"
+          >
+        </mat-form-field>
+        <div class="input-contato">
+          <mat-form-field appearance="outline" class="input-faturamento">
+            <mat-label>Celular (opcional)</mat-label>
+            <input
+              matInput
+              type="text"
+              mask="(00) 00000-0000"
+              [dropSpecialCharacters]="false"
+              [(ngModel)]="celular"
+              #cel="ngModel"
+              maxlength="15"
+            >
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="input-faturamento">
+            <mat-label>E‑mail (opcional)</mat-label>
+            <input
+              matInput
+              type="email"
+              [(ngModel)]="email"
+              #em="ngModel"
+              email
+            >
+            <mat-error *ngIf="em.invalid && em.touched">
+              Digite um e‑mail válido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="botoes-acoes">
+          <button mat-raised-button color="primary" class="btn-calcular" (click)="calcular()" [disabled]="carregando">
+            Calcular
+          </button>
+          <button mat-raised-button color="warn" class="btn-LimparAtualizar" (click)="limpar()" [disabled]="carregando">
+             Limpar 
+          </button>
+          <button mat-raised-button color="warn" class="btn-LimparAtualizar" (click)="irParaAtualizar()" [disabled]="carregando">
+            Atualizar Tabelas
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-accordion multi>
+    <!-- Sócios -->
+    <mat-expansion-panel *ngIf="showSocios" expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Sócios (IR, INSS)</mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-socios-form [(socios)]="socios"></app-socios-form>
+    </mat-expansion-panel>
+
+    <!-- Funcionários -->
+    <mat-expansion-panel *ngIf="showFuncionarios" expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Funcionários(IR, INSS)</mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-funcionarios-form [(funcionarios)]="funcionarios"></app-funcionarios-form>
+    </mat-expansion-panel>
+
+    <!-- Despesas Fixas -->
+    <mat-expansion-panel *ngIf="showDespesas" expanded >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Despesas Fixas</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="grid">
+        <mat-form-field appearance="outline" class="flex-1" >
+          <mat-label>Contador (R$)</mat-label>
+          <input
+            matInput
+            type="text"
+            currencyMask
+            [(ngModel)]="despesasFixas.contador"
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Aluguel (R$)</mat-label>
+          <input
+            matInput
+            type="text"
+            currencyMask
+            [(ngModel)]="despesasFixas.aluguelSala"
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Internet (R$)</mat-label>
+          <input
+            matInput
+            type="text"
+            currencyMask
+            [(ngModel)]="despesasFixas.internet"
+          >
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="flex-1">
+          <mat-label>Água e Energia (R$)</mat-label>
+          <input
+            matInput
+            type="text"
+            currencyMask
+            [(ngModel)]="despesasFixas.aguaEenergia"
+          >
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Loading, Erro, Resultado -->
+  <div class="loading" *ngIf="carregando"><mat-spinner diameter="40"></mat-spinner></div>
+  <div *ngIf="erro" class="erro">{{ erro }}</div>
+  <app-resultado *ngIf="resultado" [resultado]="resultado"></app-resultado>
+</mat-card>

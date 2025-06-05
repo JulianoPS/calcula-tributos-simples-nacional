@@ -1,0 +1,345 @@
+<mat-card class="atualiza-tabelas-card">
+  <mat-card-header class="header-com-acao">
+    <mat-card-title>Atualizar Tabelas</mat-card-title>
+    <div class="botoes-acoes">
+      <button mat-stroked-button color="primary" (click)="salvarTudo()">
+        Salvar Alterações
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content *ngIf="!carregando; else loadingTpl">
+    <mat-card *ngIf="empresa" class="empresa-card">
+      <mat-card-title>Empresa</mat-card-title>
+      <mat-card-content>
+        <div class="form-row">
+          <!-- Nome -->
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Nome</mat-label>
+            <input matInput
+                  [(ngModel)]="empresa.nome"
+                  [readonly]="!isNewEmpresa" />
+          </mat-form-field>
+
+          <!-- Email -->
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Email</mat-label>
+            <input matInput
+                  [(ngModel)]="empresa.email"
+                  [readonly]="!isNewEmpresa" />
+          </mat-form-field>
+
+          <!-- Celular -->
+          <mat-form-field appearance="outline" class="flex-1">
+            <mat-label>Celular</mat-label>
+            <input matInput
+                  mask="(00) 00000-0000"
+                  [(ngModel)]="empresa.celular"
+                  [readonly]="!isNewEmpresa" />
+          </mat-form-field>
+          <!-- IR por Dependente (sempre editável) -->
+          <div class="ir-dependente-container">
+            <mat-form-field appearance="outline" class="input-ir">
+              <mat-label>IR por Dependente</mat-label>
+              <input matInput
+                    type="number"
+                    [(ngModel)]="empresa.irDependente" />
+            </mat-form-field>
+            <button mat-icon-button
+                    color="primary"
+                    (click)="atualizarIrDependente()"
+                    matTooltip="Salvar IR Dependente">
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- ANEXO III -->
+    <mat-expansion-panel *ngIf="showAnexoIII" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Anexo III</mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <table mat-table [dataSource]="anexoIII" class="mat-elevation-z1 compact-table">
+                <ng-container matColumnDef="faixa">
+          <th mat-header-cell *matHeaderCellDef>Faixa</th>
+          <td mat-cell        *matCellDef="let e">{{ e.faixa }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteInic">
+          <th mat-header-cell *matHeaderCellDef>Início</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteInic"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteFin">
+          <th mat-header-cell *matHeaderCellDef>Limite Final</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteFin"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="aliquota">
+          <th mat-header-cell *matHeaderCellDef>Alíquota (%)</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [options]="{ precision: 1, decimal: ',', thousands: '.', prefix: '' }"
+                [(ngModel)]="e.aliquota"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vlrDeduzir">
+          <th mat-header-cell *matHeaderCellDef>Vlr. Deduzir</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.vlrDeduzir"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+        <tr mat-row        *matRowDef="let row; columns: ['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+
+      </table>
+    </mat-expansion-panel>
+
+    <!-- ANEXO V -->
+    <mat-expansion-panel *ngIf="showAnexoV" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Anexo V</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="anexoV" class="mat-elevation-z1 compact-table">
+                <ng-container matColumnDef="faixa">
+          <th mat-header-cell *matHeaderCellDef>Faixa</th>
+          <td mat-cell        *matCellDef="let e">{{ e.faixa }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteInic">
+          <th mat-header-cell *matHeaderCellDef>Início</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteInic"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteFin">
+          <th mat-header-cell *matHeaderCellDef>Limite Final</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteFin"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="aliquota">
+          <th mat-header-cell *matHeaderCellDef>Alíquota (%)</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [options]="{ precision: 1, decimal: ',', thousands: '.', prefix: '' }"
+                [(ngModel)]="e.aliquota"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vlrDeduzir">
+          <th mat-header-cell *matHeaderCellDef>Vlr. Deduzir</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.vlrDeduzir"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+        <tr mat-row        *matRowDef="let row; columns: ['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+
+      </table>
+    </mat-expansion-panel>
+
+    <!-- TABELA INSS -->
+    <mat-expansion-panel *ngIf="showINSS" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Tabela INSS</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="tabelaINSS" class="mat-elevation-z1 compact-table">
+               <ng-container matColumnDef="faixa">
+          <th mat-header-cell *matHeaderCellDef>Faixa</th>
+          <td mat-cell        *matCellDef="let e">{{ e.faixa }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteInic">
+          <th mat-header-cell *matHeaderCellDef>Início</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteInic"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteFin">
+          <th mat-header-cell *matHeaderCellDef>Limite Final</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteFin"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="aliquota">
+          <th mat-header-cell *matHeaderCellDef>Alíquota (%)</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [options]="{ precision: 1, decimal: ',', thousands: '.', prefix: '' }"
+                [(ngModel)]="e.aliquota"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vlrDeduzir">
+          <th mat-header-cell *matHeaderCellDef>Vlr. Deduzir</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.vlrDeduzir"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+        <tr mat-row        *matRowDef="let row; columns: ['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+
+      </table>
+    </mat-expansion-panel>
+
+    <!-- TABELA IR -->
+    <mat-expansion-panel *ngIf="showIR" expanded >
+      <mat-expansion-panel-header>
+        <mat-panel-title>Tabela IR</mat-panel-title>
+      </mat-expansion-panel-header>
+      <table mat-table [dataSource]="tabelaIR" class="mat-elevation-z1 compact-table">
+                <ng-container matColumnDef="faixa">
+          <th mat-header-cell *matHeaderCellDef>Faixa</th>
+          <td mat-cell        *matCellDef="let e">{{ e.faixa }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteInic">
+          <th mat-header-cell *matHeaderCellDef>Início</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteInic"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="limiteFin">
+          <th mat-header-cell *matHeaderCellDef>Limite Final</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.limiteFin"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="aliquota">
+          <th mat-header-cell *matHeaderCellDef>Alíquota (%)</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [options]="{ precision: 1, decimal: ',', thousands: '.', prefix: '' }"
+                [(ngModel)]="e.aliquota"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="vlrDeduzir">
+          <th mat-header-cell *matHeaderCellDef>Vlr. Deduzir</th>
+          <td mat-cell        *matCellDef="let e">
+            <mat-form-field appearance="outline" class="campo-editavel">
+              <input
+                matInput
+                currencyMask
+                [(ngModel)]="e.vlrDeduzir"
+              />
+            </mat-form-field>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+        <tr mat-row        *matRowDef="let row; columns: ['faixa','limiteInic','limiteFin','aliquota','vlrDeduzir']"></tr>
+
+      </table>
+    </mat-expansion-panel>
+
+  </mat-card-content>
+</mat-card>
+
+<ng-template #loadingTpl>
+  <mat-spinner></mat-spinner>
+</ng-template>

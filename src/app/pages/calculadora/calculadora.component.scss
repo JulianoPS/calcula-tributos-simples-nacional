@@ -1,0 +1,99 @@
+.painel-principal {
+  margin-bottom: 6px;
+  padding-top: 6px;
+  background-color: white;
+
+  mat-card-header {
+    padding: 0;
+    margin-bottom: 9px;
+
+    mat-card-title {
+      font-size: 26px;
+      font-weight: 600;
+      padding-left: 18px;
+    }
+  }
+ 
+  .input-botoes {
+    display: flex;
+    gap: 6px;
+    margin-bottom: -14px;
+    flex-wrap: wrap;
+  }
+
+  .input-faturamento {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .botoes-acoes {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  mat-form-field.input-faturamento {
+    flex: 1 1 200px;
+    min-width: 200px;
+  }
+  
+}
+
+.calculadora-card {
+  padding: 12px;
+}
+
+mat-panel-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: -4px;
+}
+
+mat-expansion-panel{
+  margin-top: -6px;
+}
+
+.grid {
+  display: flex;
+  margin-bottom: -24px;
+  margin-top: -8px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.flex-1 {
+  flex: 1 1 160px;
+  min-width: 140px;
+  margin-top: -4px;
+}
+
+.input-contato {
+  display: flex;
+  gap: 6px;
+  margin-bottom: px;
+  flex-wrap: wrap;
+}
+
+.input-contato .flex-1 {
+  flex: 1 1 200px;
+  min-width: 140px;
+} 
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 150, 136, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(0, 150, 136, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 150, 136, 0); }
+}
+
+.btn-calcular {
+  font-size: 20px;       /* fonte maior */
+  padding: 27px 30px;    /* botão mais “gordo” */
+  border-radius: 4px;
+}
+
+.btn-LimparAtualizar {
+  font-size: 16px;       /* fonte maior */
+  padding: 27px 12px;    /* botão mais “gordo” */
+  border-radius: 4px;
+}
+

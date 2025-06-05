@@ -1,0 +1,36 @@
+<div *ngFor="let funcionario of funcionarios; let i = index" class="socio-card">
+  <div class="form-row">
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Nome do Funcionário</mat-label>
+      <input matInput [(ngModel)]="funcionario.nome" (ngModelChange)="atualizar()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Salário (R$)</mat-label>
+      <input 
+        matInput
+        type="text"
+        currencyMask
+        [(ngModel)]="funcionario.valorSalario" 
+        (ngModelChange)="atualizar()"
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Nº Dependentes</mat-label>
+      <input matInput type="number" [(ngModel)]="funcionario.numeroDependentes" (ngModelChange)="atualizar()">
+    </mat-form-field>
+
+    <button mat-icon-button color="warn" (click)="removerFuncionario(i)" aria-label="Remover Funcionário">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="add-button">
+  <button mat-raised-button color="primary" (click)="adicionarFuncionario()">
+    <mat-icon>add</mat-icon> Adicionar Funcionário
+  </button>
+</div>
+
+

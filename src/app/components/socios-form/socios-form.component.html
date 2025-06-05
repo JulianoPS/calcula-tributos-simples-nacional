@@ -1,0 +1,34 @@
+<div *ngFor="let socio of socios; let i = index" class="socio-card">
+  <div class="form-row">
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Nome do Sócio</mat-label>
+      <input matInput [(ngModel)]="socio.nome" (ngModelChange)="atualizar()">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Pró-labore (R$)</mat-label>
+      <input 
+        matInput
+        type="text"
+        currencyMask
+        [(ngModel)]="socio.valorProLabore" 
+        (ngModelChange)="atualizar()"
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="flex-1">
+      <mat-label>Nº Dependentes</mat-label>
+      <input matInput type="number" [(ngModel)]="socio.numeroDependentes" (ngModelChange)="atualizar()">
+    </mat-form-field>
+
+    <button mat-icon-button color="warn" (click)="removerSocio(i)" aria-label="Remover Sócio">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="add-button">
+  <button mat-raised-button color="primary" (click)="adicionarSocio()">
+    <mat-icon>add</mat-icon> Adicionar Sócio
+  </button>
+</div>

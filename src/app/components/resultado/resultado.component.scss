@@ -1,0 +1,45 @@
+/* Estilo base da tabela */
+.tabela-compacta {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 4px 6px;
+  }
+
+  th {
+    background-color: #f5f5f5;
+    text-align: left;
+  }
+}
+
+/* Linha verde — Anexo III */
+.linha-verde {
+  background-color: #e8f5e9; /* verde bem claro */
+  color: #2e7d32;            /* verde escuro do Material */
+  font-weight: 600;
+
+  td {
+    border-color: #a5d6a7; /* verde claro nas bordas */
+  }
+}
+
+/* Linha azul — Anexo V */
+.linha-azul {
+  background-color: #e3f2fd; /* azul bem claro */
+  color: #1565c0;            /* azul escuro do Material */
+  font-weight: 600;
+
+  td {
+    border-color: #90caf9; /* azul claro nas bordas */
+  }
+}
+
+/* Card Material */
+mat-card {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}

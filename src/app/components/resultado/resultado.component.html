@@ -1,0 +1,148 @@
+<mat-card>
+  <h2>Resultado do Cálculo</h2>
+
+  <mat-accordion multi="true">
+
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: -12px;">
+
+      <!-- Dados Gerais -->
+      <mat-expansion-panel style="flex: 1; min-width: 350px;" [expanded]="resultado.faturamentoMensal > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Dados Gerais </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table class="tabela-compacta">
+          <tr><td>Faturamento Mensal:</td><td>R$ {{ resultado.faturamentoMensal | number: '1.2-2' }}</td></tr>
+          <tr><td>Faturamento Anual:</td><td>R$ {{ resultado.faturamentoAnual | number: '1.2-2' }}</td></tr>
+          <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
+            <td>Imposto Simples:</td>
+            <td>R$ {{ resultado.das | number: '1.2-2' }}</td>
+          </tr>
+          <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
+            <td>Fator R:</td>
+            <td>{{ resultado.fatorR | number: '1.4-4' }}</td>
+          </tr>
+          <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
+            <td>Anexo:</td><td>{{ resultado.anexo }}</td>
+          </tr>
+          <tr><td>Alíquota Nominal:</td><td>{{ resultado.aliquotaNominal }}%</td></tr>
+          <tr><td>Alíquota Efetiva:</td><td>{{ resultado.aliquotaEfetiva }}%</td></tr>
+          <tr><td>Folha de Salários:</td><td>R$ {{ resultado.folhaSalarios | number: '1.2-2' }}</td></tr>
+          <tr><td>Valor Líquido:</td><td>R$ {{ resultado.valorLiquidoMensal | number: '1.2-2' }}</td></tr>
+        </table>
+      </mat-expansion-panel>
+
+      <!-- Encargos -->
+      <mat-expansion-panel style="flex: 1; min-width: 350px;" [expanded]="resultado.faturamentoMensal > 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Encargos  (CPP e FGTS) {{ resultado.encargos.msg }} </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <table class="tabela-compacta">
+          <tr><td>CPP Sócios:</td><td>R$ {{ resultado.encargos.cppSociosMensal | number: '1.2-2' }}</td></tr>
+          <tr><td>CPP Funcionários:</td><td>R$ {{ resultado.encargos.cppFuncionariosMensal | number: '1.2-2' }}</td></tr>
+          <tr><td>FGTS:</td><td>R$ {{ resultado.encargos.fgtsMensal | number: '1.2-2' }}</td></tr>
+          <tr><td><strong>Total Encargos:</strong></td><td><strong>R$ {{ resultado.encargos.totalEncargosMensal | number: '1.2-2' }}</strong></td></tr>
+        </table>
+
+        <h4 style="margin-top: 12px; font-weight: normal;">{{ resultado.encargosMEI.msg }}</h4>
+        <table class="tabela-compacta">
+          <tr><td>DAS:</td><td>R$ {{ resultado.encargosMEI.das | number: '1.2-2' }}</td></tr>
+          <tr><td>IRPF:</td><td>R$ {{ resultado.encargosMEI.irpf | number: '1.2-2' }}</td></tr>
+          <tr><td><strong>Total:</strong></td><td><strong>R$ {{ resultado.encargosMEI.total | number: '1.2-2' }}</strong></td></tr>
+        </table>
+      </mat-expansion-panel>
+
+    </div>
+
+    <!-- Despesas Fixas -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Despesas Fixas </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <table class="tabela-compacta">
+        <tr><th></th><th>Mensal</th><th>Anual</th></tr>
+        <tr><td>Contador:</td><td>R$ {{ resultado.despesasFixas.contador | number: '1.2-2' }}</td><td>R$ {{ resultado.despesasFixasAnual.contadorAnual | number: '1.2-2' }}</td></tr>
+        <tr><td>Aluguel:</td><td>R$ {{ resultado.despesasFixas.aluguelSala | number: '1.2-2' }}</td><td>R$ {{ resultado.despesasFixasAnual.aluguelSalaAnual | number: '1.2-2' }}</td></tr>
+        <tr><td>Internet:</td><td>R$ {{ resultado.despesasFixas.internet | number: '1.2-2' }}</td><td>R$ {{ resultado.despesasFixasAnual.internetAnual | number: '1.2-2' }}</td></tr>
+        <tr><td>Água/Energia:</td><td>R$ {{ resultado.despesasFixas.aguaEenergia | number: '1.2-2' }}</td><td>R$ {{ resultado.despesasFixasAnual.aguaEenergiaAnual | number: '1.2-2' }}</td></tr>
+      </table>
+    </mat-expansion-panel>
+
+    <!-- Sócios -->
+    <mat-expansion-panel [expanded]="deveAbrirSocios">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Pró-labore dos Sócios </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="resultado.socios.length > 0; else semSocios">
+        <table class="tabela-compacta">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Mensal</th>
+              <th>Anual</th>
+              <th>Dependentes</th>
+              <th>INSS</th>
+              <th>IR</th>
+              <th>Vlr Líquido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let socio of resultado.socios">
+              <td>{{ socio.nome }}</td>
+              <td>R$ {{ socio.valorProLabore | number: '1.2-2' }}</td>
+              <td>R$ {{ socio.valorProLaboreAnual | number: '1.2-2' }}</td>
+              <td>{{ socio.numeroDependentes }}</td>
+              <td>R$ {{ socio.valorINSS | number: '1.2-2' }}</td>
+              <td>R$ {{ socio.valorIR | number: '1.2-2' }}</td>
+              <td>R$ {{ socio.valorLiquido | number: '1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #semSocios>
+        <p>Nenhum sócio informado.</p>
+      </ng-template>
+    </mat-expansion-panel>
+
+    <!-- Funcionários -->
+    <mat-expansion-panel [expanded]="deveAbrirFuncionarios">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Salários de Funcionários </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="resultado.funcionarios.length > 0; else semFuncionarios">
+        <table class="tabela-compacta">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Mensal</th>
+              <th>Anual</th>
+              <th>Dependentes</th>
+              <th>INSS</th>
+              <th>IR</th>
+              <th>Vlr Líquido</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let func of resultado.funcionarios">
+              <td>{{ func.nome }}</td>
+              <td>R$ {{ func.valorSalario | number: '1.2-2' }}</td>
+              <td>R$ {{ func.valorSalarioAnual | number: '1.2-2' }}</td>
+              <td>{{ func.numeroDependentes }}</td>
+              <td>R$ {{ func.valorINSS | number: '1.2-2' }}</td>
+              <td>R$ {{ func.valorIR | number: '1.2-2' }}</td>
+              <td>R$ {{ func.valorLiquido | number: '1.2-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #semFuncionarios>
+        <p>Nenhum funcionário informado.</p>
+      </ng-template>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</mat-card>

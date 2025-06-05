@@ -1,0 +1,62 @@
+:host {
+  --mat-form-field-container-height: 38px !important;
+  --mat-form-field-container-vertical-padding: 10px !important;
+  --mat-form-field-container-text-size: 12px !important;
+}
+
+::ng-deep .mat-mdc-form-field .mat-mdc-input-element {
+  height: 22px !important;
+  line-height: 22px !important;
+  padding: 2 px !important;
+  font-size: 13px !important;
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+header-com-acao {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.botoes-acoes {
+    display: flex;
+    gap: 6px;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    margin-left: 18px;
+}
+
+.empresa-card {
+  margin-bottom: 16px;
+  background-color: #f5f5f5;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+  margin-top: 14px;
+}
+
+.flex-1 {
+  flex: 1 1 160px;
+  min-width: 140px;
+  
+}
+
+.ir-dependente-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-ir {
+  width: 100px;
+}
+
+
+
