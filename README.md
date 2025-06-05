@@ -65,5 +65,6 @@ cd calcula-tributos-simples-n
 
 
 ## 📬 Contato
-- 🔗 **LinkedIn:** [linkedin.com/in/julianopereiradossantos](https://www.linkedin.com/in/julianopereiradossantos)  
+- 🔗 **LinkedIn:** [linkedin.com/in/julianopereiradossantos]( https://www.linkedin.com/in/julianopereiradossantos )  
 - ✉️ **Email:** juliano@email.com  
+- 🐙 **GitHub:** [github.com/JulianoPS]( https://github.com/JulianoPS )
