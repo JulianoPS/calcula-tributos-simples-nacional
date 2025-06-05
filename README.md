@@ -1,59 +1,69 @@
-# SimplesNacionalFront
+# 📊 Calcula Tributos Simples Nacional
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+Aplicação desenvolvida em **Angular 19** que realiza o cálculo de tributos no regime do **Simples Nacional**, considerando:
 
-## Development server
+- **Fator R**
+- **Anexos III e V**
+- **Cálculo de pró-labore (INSS e IR) dos sócios**
+- **Funcionários (INSS e IR)**
+- **Despesas fixas (contador, aluguel, internet, água e energia)**
+- **Encargos previdenciários (CPP, FGTS)**
+- Comparativo com modelo **MEI**
 
-To start a local development server, run:
+---
+
+## 🖼️ **Screenshots**
+
+### 🔸 Tela Principal
+![Tela Principal](./assets/screenshot1.png)
+
+### 🔸 Resultado do Cálculo
+![Resultado do Cálculo](./assets/screenshot2.png)
+
+---
+
+## 🚀 **Tecnologias Utilizadas**
+
+- ✅ Angular **19**
+- ✅ Angular Material
+- ✅ TypeScript
+- ✅ RxJS
+- ✅ SCSS
+- ✅ ngx-mask
+- ✅ ngx-currency
+- ✅ API REST em **.NET 8** (backend próprio — não incluso neste repositório)
+
+---
+
+## 🏗️ **Funcionalidades Implementadas**
+
+- 🔸 Cálculo automático do **Simples Nacional**
+- 🔸 Avaliação do **Fator R** (Anexo III ou V)
+- 🔸 Simulação de **encargos previdenciários** (CPP, FGTS)
+- 🔸 Cálculo detalhado de **INSS e IR** para sócios e funcionários
+- 🔸 Permite adicionar múltiplos sócios e funcionários
+- 🔸 Avaliação comparativa com **MEI**
+- 🔸 Interface 100% responsiva, com Material Design
+- 🔸 Tela de manutenção de tabelas (alíquotas, INSS, IR)
+
+---
+
+## 📦 **Instalação e Execução Local**
+
+### 🔧 **Pré-requisitos**
+- Node.js >= 18
+- Angular CLI >= 17
+
+### ▶️ **Passos para rodar local**
 
 ```bash
-ng serve
-```
+# Clone este repositório
+git clone https://github.com/JulianoPS/calcula-tributos-simples-nacional.git
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+# Acesse a pasta do projeto
+cd calcula-tributos-simples-n
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📬 Contato
+- 🔗 **LinkedIn:** [linkedin.com/in/julianopereiradossantos](https://www.linkedin.com/in/julianopereiradossantos)  
+- ✉️ **Email:** juliano@email.com  
