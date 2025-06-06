@@ -8,27 +8,32 @@
       <!-- Dados Gerais -->
       <mat-expansion-panel style="flex: 1; min-width: 350px;" [expanded]="resultado.faturamentoMensal > 0">
         <mat-expansion-panel-header>
-          <mat-panel-title> Dados Gerais </mat-panel-title>
+          <mat-panel-title> Valor Liquido = Fat. Mensal-(Folha + DespFixa + DAS) </mat-panel-title>
         </mat-expansion-panel-header>
 
         <table class="tabela-compacta">
           <tr><td>Faturamento Mensal:</td><td>R$ {{ resultado.faturamentoMensal | number: '1.2-2' }}</td></tr>
           <tr><td>Faturamento Anual:</td><td>R$ {{ resultado.faturamentoAnual | number: '1.2-2' }}</td></tr>
+          <tr><td>Alíquota Nominal, Efetiva:</td><td>{{ resultado.aliquotaNominal }}% , {{ resultado.aliquotaEfetiva }}%</td></tr>
           <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
-            <td>Imposto Simples:</td>
-            <td>R$ {{ resultado.das | number: '1.2-2' }}</td>
+            <td>Anexo:</td><td>{{ resultado.anexo }}</td>
           </tr>
           <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
             <td>Fator R:</td>
             <td>{{ resultado.fatorR | number: '1.4-4' }}</td>
           </tr>
           <tr [ngClass]="{ 'linha-verde': resultado.anexo === 'III', 'linha-azul': resultado.anexo === 'V' }">
-            <td>Anexo:</td><td>{{ resultado.anexo }}</td>
+            <td>Imposto Simples:</td>
+            <td>R$ {{ resultado.das | number: '1.2-2' }}</td>
           </tr>
-          <tr><td>Alíquota Nominal:</td><td>{{ resultado.aliquotaNominal }}%</td></tr>
-          <tr><td>Alíquota Efetiva:</td><td>{{ resultado.aliquotaEfetiva }}%</td></tr>
           <tr><td>Folha de Salários:</td><td>R$ {{ resultado.folhaSalarios | number: '1.2-2' }}</td></tr>
-          <tr><td>Valor Líquido:</td><td>R$ {{ resultado.valorLiquidoMensal | number: '1.2-2' }}</td></tr>
+          <tr><td>Valor Desp. Fixas:</td><td>R$ {{ resultado.vlrDespFixas | number: '1.2-2' }}</td></tr>
+          <tr [ngClass]="resultado.valorLiquidoMensal < 0 ? 'valor-negativo' : 'valor-positivo'">
+            <td>Valor Líquido:</td>
+            <td >
+              R$ {{ resultado.valorLiquidoMensal | number: '1.2-2' }}
+            </td>
+          </tr>
         </table>
       </mat-expansion-panel>
 
@@ -120,6 +125,7 @@
               <th>Nome</th>
               <th>Mensal</th>
               <th>Anual</th>
+              <th>Media Mês</th>
               <th>Dependentes</th>
               <th>INSS</th>
               <th>IR</th>
@@ -131,6 +137,7 @@
               <td>{{ func.nome }}</td>
               <td>R$ {{ func.valorSalario | number: '1.2-2' }}</td>
               <td>R$ {{ func.valorSalarioAnual | number: '1.2-2' }}</td>
+              <td>R$ {{ func.mediaMensal | number: '1.2-2' }}</td>
               <td>{{ func.numeroDependentes }}</td>
               <td>R$ {{ func.valorINSS | number: '1.2-2' }}</td>
               <td>R$ {{ func.valorIR | number: '1.2-2' }}</td>

@@ -26,6 +26,7 @@ export interface FuncionarioResponseDto {
   nome: string;
   valorSalario: number;
   valorSalarioAnual: number;
+  mediaMensal: number;
   numeroDependentes: number;
   valorINSS: number;
   valorIR: number;
@@ -51,6 +52,7 @@ export interface CalculoResponseDto {
   faturamentoMensal: number;
   faturamentoAnual: number;
   folhaSalarios: number;
+  vlrDespFixas: number;
   fatorR: number;
   anexo: string;               // "III" ou "V"
   aliquotaNominal: number;

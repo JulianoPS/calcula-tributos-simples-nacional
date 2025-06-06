@@ -43,3 +43,23 @@ mat-card {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+.valor-negativo {
+  color: #d32f2f; /* vermelho Material */
+  font-weight: bold;
+  background-color: #fdece3; 
+  font-weight: 700;
+  td {
+    border-color: #90caf9; 
+  }
+}
+
+.valor-positivo {
+  background-color: #e8f5e9; /* verde bem claro */
+  color: #2e7d32;            /* verde escuro do Material */
+  font-weight: 700;
+  font-weight: bold;
+  td {
+    border-color: #a5d6a7; /* verde claro nas bordas */
+  }
+}

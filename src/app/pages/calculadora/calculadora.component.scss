@@ -97,3 +97,29 @@ mat-expansion-panel{
   border-radius: 4px;
 }
 
+.input-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: -14px;
+}
+
+.campo-atividade {
+  flex: 2 1 300px;
+  min-width: 250px;
+}
+
+.campo-faturamento {
+  flex: 1 1 160px;
+  min-width: 140px;
+}
+
+.campo-celular {
+  flex: 1 1 160px;
+  min-width: 140px;
+}
+
+.campo-email {
+  flex: 2 1 260px;
+  min-width: 220px;
+}

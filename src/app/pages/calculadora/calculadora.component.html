@@ -5,25 +5,23 @@
     </mat-card-header>
     <mat-card-content>
       <div class="input-botoes">
-        <mat-form-field appearance="outline" class="input-faturamento">
+        <!-- Atividade - mais larga -->
+        <mat-form-field appearance="outline" class="campo-atividade">
           <mat-label>Atividade</mat-label>
           <mat-select [(ngModel)]="atividadeSelecionada">
-            <mat-option *ngFor="let a of listaAtividades" [value]="a">
-              {{ a }}
-            </mat-option>
+            <mat-option *ngFor="let a of listaAtividades" [value]="a">{{ a }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="outline" class="input-faturamento">
+
+        <!-- Faturamento - menor -->
+        <mat-form-field appearance="outline" class="campo-faturamento">
           <mat-label>Faturamento Mensal (R$)</mat-label>
-          <input
-            matInput
-            type="text"
-            currencyMask
-            [(ngModel)]="faturamentoMensal"
-          >
+          <input matInput type="text" currencyMask [(ngModel)]="faturamentoMensal" />
         </mat-form-field>
+        
         <div class="input-contato">
-          <mat-form-field appearance="outline" class="input-faturamento">
+          <!-- Celular - menor -->
+          <mat-form-field appearance="outline" class="campo-celular">
             <mat-label>Celular (opcional)</mat-label>
             <input
               matInput
@@ -31,12 +29,12 @@
               mask="(00) 00000-0000"
               [dropSpecialCharacters]="false"
               [(ngModel)]="celular"
-              #cel="ngModel"
               maxlength="15"
-            >
+            />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="input-faturamento">
+          <!-- E‑mail - mais largo -->
+          <mat-form-field appearance="outline" class="campo-email">
             <mat-label>E‑mail (opcional)</mat-label>
             <input
               matInput
@@ -44,12 +42,13 @@
               [(ngModel)]="email"
               #em="ngModel"
               email
-            >
+            />
             <mat-error *ngIf="em.invalid && em.touched">
               Digite um e‑mail válido
             </mat-error>
           </mat-form-field>
         </div>
+
         <div class="botoes-acoes">
           <button mat-raised-button color="primary" class="btn-calcular" (click)="calcular()" [disabled]="carregando">
             Calcular
