@@ -11,7 +11,7 @@ Aplicação desenvolvida em **Angular 19** que realiza o cálculo de tributos no
 ---
 
 ## 🖼️ **Screenshots**
-![Ação](./assets/screenshot.png)
+![Ação](./assets/screenshot.gif)
 
 ### 🔸 Tela Principal
 ![Tela Principal](./assets/screenshot1.png)
