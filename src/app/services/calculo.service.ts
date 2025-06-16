@@ -1,25 +1,28 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CalculoRequestDto } from '../models/calculo-request.dto';
 import { CalculoResponseDto } from '../models/calculo-response.dto';
+import { Inject, Injectable } from '@angular/core';
+import { API_BASE_URL } from '../api.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculoService {
-  
-  private readonly API_URL = 'https://localhost:7099/api/Calculos/simples-nacional'; // ✅ Apntar para API
-  private readonly API_ATIVIDADES = 'https://localhost:7099/api/Atividades';
-  
-  constructor(private http: HttpClient) { }
+  private get calculoUrl() { return `${this.apiBase}/Calculos/simples-nacional`; }
+  private get atividadesUrl() { return `${this.apiBase}/Atividades`; }
+
+  constructor(
+    private http: HttpClient,
+    @Inject(API_BASE_URL) private apiBase: string
+  ) { }
 
   calcularImposto(request: CalculoRequestDto): Observable<CalculoResponseDto> {
-    return this.http.post<CalculoResponseDto>(`${this.API_URL}`, request);
+    return this.http.post<CalculoResponseDto>(`${this.calculoUrl}`, request);
   }
 
   getAtividades(): Observable<string[]> {
-    return this.http.get<string[]>(this.API_ATIVIDADES);
+    return this.http.get<string[]>(this.atividadesUrl);
   }
   
 }

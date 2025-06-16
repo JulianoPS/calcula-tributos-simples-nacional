@@ -22,6 +22,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { MatSelectModule } from '@angular/material/select';        
 import { MatOptionModule } from '@angular/material/core';         
+import { AdBannerComponent } from '../../components/ad-banner/ad-banner.component';
 
 @Component({
   selector: 'app-calculadora',
@@ -43,6 +44,12 @@ import { MatOptionModule } from '@angular/material/core';
     MatSnackBarModule,
     MatSelectModule,
     MatOptionModule,
+
+    SociosFormComponent,
+    FuncionariosFormComponent,
+    ResultadoComponent,
+
+    AdBannerComponent
   ],
   providers: [provideNgxMask()],
   templateUrl: './calculadora.component.html',
@@ -69,6 +76,7 @@ export class CalculadoraComponent {
   showDespesas     = true;
   showSocios       = true;
   showFuncionarios = true;
+  public showAd = false;
 
   constructor(
     private calculoService: CalculoService,
@@ -203,15 +211,6 @@ export class CalculadoraComponent {
   }
 
   limpar() {
-    this.faturamentoMensal = 0;
-    this.socios            = [];
-    this.funcionarios      = [];
-    this.despesasFixas     = {
-      contador: 0,
-      aluguelSala: 0,
-      internet: 0,
-      aguaEenergia: 0
-    };
     this.resultado        = undefined;
     this.erro             = undefined;
     this.showDespesas     = true;

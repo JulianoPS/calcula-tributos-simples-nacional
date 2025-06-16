@@ -1,20 +1,21 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { AnexoIIIItem } from '../models/anexo-iii-item.model';
 import { AnexoVItem } from '../models/anexo-v-item.model';
 import { INSSItem } from '../models/inss-item.model';
 import { IRItem } from '../models/ir-item.model';
-import { CalculoRequestDto } from '../models/calculo-request.dto';
-import { CalculoResponseDto } from '../models/calculo-response.dto';
+import { Inject, Injectable } from '@angular/core';
+import { API_BASE_URL } from '../api.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TabelasService {
-  private readonly API_BASE = 'https://localhost:7099/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    @Inject(API_BASE_URL) private API_BASE: string
+  ) {}
 
   // 🔸 Utilitário para limpar celular
   private limparCelular(celular: string): string {

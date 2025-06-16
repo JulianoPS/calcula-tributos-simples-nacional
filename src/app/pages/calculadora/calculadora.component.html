@@ -57,13 +57,14 @@
              Limpar 
           </button>
           <button mat-raised-button color="warn" class="btn-LimparAtualizar" (click)="irParaAtualizar()" [disabled]="carregando">
-            Atualizar Tabelas
+            Atualiza Tab
           </button>
         </div>
       </div>
     </mat-card-content>
   </mat-card>
 
+ 
   <mat-accordion multi>
     <!-- Sócios -->
     <mat-expansion-panel *ngIf="showSocios" expanded>
@@ -126,6 +127,21 @@
       </div>
     </mat-expansion-panel>
   </mat-accordion>
+
+   <!-- === EXIBINDO O AD BANNER AQUI === 
+  <app-ad-banner
+    adClient="ca-pub-1234567890123456"
+    adSlot="9876543210"
+    adFormat="auto">
+  </app-ad-banner> -->
+
+  <app-ad-banner
+    *ngIf="showAd"
+    (noAd)="showAd = false"
+    adClient="..."
+    adSlot="..."
+    adFormat="auto">
+  </app-ad-banner>
 
   <!-- Loading, Erro, Resultado -->
   <div class="loading" *ngIf="carregando"><mat-spinner diameter="40"></mat-spinner></div>

@@ -21,16 +21,19 @@
       <input matInput type="number" [(ngModel)]="funcionario.numeroDependentes" (ngModelChange)="atualizar()">
     </mat-form-field>
 
-    <button mat-icon-button color="warn" (click)="removerFuncionario(i)" aria-label="Remover Funcionário">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="add-button">
+      <button mat-raised-button color="primary" (click)="adicionarFuncionario()">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="removerFuncionario(i)" aria-label="Remover Funcionário">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </div>
   </div>
 </div>
 
-<div class="add-button">
-  <button mat-raised-button color="primary" (click)="adicionarFuncionario()">
-    <mat-icon>add</mat-icon> Adicionar Funcionário
-  </button>
-</div>
+
 
 

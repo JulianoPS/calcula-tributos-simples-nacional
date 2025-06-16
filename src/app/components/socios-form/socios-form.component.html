@@ -21,14 +21,16 @@
       <input matInput type="number" [(ngModel)]="socio.numeroDependentes" (ngModelChange)="atualizar()">
     </mat-form-field>
 
-    <button mat-icon-button color="warn" (click)="removerSocio(i)" aria-label="Remover Sócio">
-      <mat-icon>delete</mat-icon>
-    </button>
+    <div class="add-button">
+      <button mat-raised-button color="primary" (click)="adicionarSocio()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="removerSocio(i)" aria-label="Remover Sócio">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
   </div>
 </div>
 
-<div class="add-button">
-  <button mat-raised-button color="primary" (click)="adicionarSocio()">
-    <mat-icon>add</mat-icon> Adicionar Sócio
-  </button>
-</div>
+

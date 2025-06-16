@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 5px;
+  margin-bottom: -5px;
   margin-top: -14px;
 }
 
@@ -13,9 +13,8 @@
 }
 
 .add-button {
-  margin-top: 1px;
+  margin-top: -8px;
+  display: flex;
+  gap: 2px;
+  margin-bottom: 0px;
 }
-
-
-
-
