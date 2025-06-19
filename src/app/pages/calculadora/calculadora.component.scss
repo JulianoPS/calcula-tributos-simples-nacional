@@ -138,3 +138,52 @@ mat-expansion-panel{
   --mat-form-field-container-vertical-padding: 0.15rem;
   --mat-form-field-container-text-size: 13px;
 }
+
+.layout-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 0;       /* zera margem extra */
+  padding: 0;      /* zera padding extra */
+
+  .ad-box-side {
+    flex: 0 0 160px;
+    margin-top: 0; /* alinha ao mesmo topo */
+  }
+  .card-container {
+    flex: 1;
+    margin-top: 0; /* sem espaço acima */
+  }
+}
+
+@media (max-width: 600px) {
+  .layout-container {
+    flex-direction: column;
+  }
+  .ad-box-side,
+  .card-container {
+    width: 100%;
+  }
+}
+
+.contato-box {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+
+  a {
+    color: #1976d2; /* cor padrão de link */
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+

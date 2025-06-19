@@ -4,11 +4,14 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideNgxMask }        from 'ngx-mask';
 import { API_BASE_URL } from './app/api.config';
+import { APP_BASE_HREF } from '@angular/common';
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
-    ...(appConfig.providers || []),
+    ...(appConfig.providers || [
+      { provide: APP_BASE_HREF, useValue: '/'},
+    ]),
     provideNgxMask(),
     provideEnvironmentNgxCurrency({           // ← configurações globais
       align: 'right',                         // alinhamento do texto
